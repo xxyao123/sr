@@ -1,0 +1,34 @@
+{
+  "Identity": {
+    "PeerID": "QmQR1DQNhDxsrk78ads6ccb8nDUG77c5tGK95HiXwQKUuV",
+    "PrivKey": "CAASpwkwggSjAgEAAoIBAQCrlP/cuKkcX3/0nUC1jIQC2Mdqer9J8Pn8J68+iwyU0YOeW56g3ALKEO7L/ftEJNJB7VY+hOx/SSY6HdBHWgo9WGOS0O5AcXuQDvlc594i+FDrEgm2LxlROlHBsrlRwvgHHraJ8XjUT/n4CkhZfIS3xfSZwfODi4uiUEFvYitUA9XRVKnWsUfF89C5mp1f38YnQzLdZ4DSl4srDavIuNH12sNWwqzlu3B0ao4JcuLlopKJzUUkn6KEAMd7oeJE7BwbY7P1fIRMJRALggEP2un6tAykyu6ycz59u48bIMHVbT4pWdyHDAy8y9HJNUxNin2pqNxxV25bJ3lW3JG7fcF7AgMBAAECggEAMYC/gRLV15XF+PEVpktwGtIoVpQrdE3OEe3xJX5Alv8Lljigv5A6Tcos2zXftH1bHCI5a7g181NLcCEB4lQb+C70K3uUAYu8Nofbce6DrFswHWIK40EbcM/+nn/N78TsgkFeMNY2Iisg12tADHFcaRj3xRSsCRvNoXq+JkCQd6BZWsu+VK2HNM2rHdtWm6Y5AktvYUai8smaPjQG7m09v3vs5nDDd8czwRTpdbkr1Ii1XMOzYusbfE0YHmS89pR/WqRsKJ2EhvvKV1Gn0E4Wpi3b9tylkZ3QARUZ+OmP0aEodJOIkuzOSVBVdpgN2Rrswk2naJJcazUAKw19rZLLIQKBgQDzWEkXxqfT7BBDf18iECqkmsmBLVWFTt2MHw4/IlalPlfe/rTxITMkyXXI4cVr/9eFJkZuU7ih2gcfPOr/PPd0/HF3cNkhtOzQNGX15cXmeRQ4traj24tP8NSyQdiIX5PKFWdhjqccM+cNkSTXJp9LG3Zrl6GF65/JDOv005v2PwKBgQC0gVD8CskdmgalfwhZ6QPCEB/8yzrQVQko6a+HC5m8w7plzR5VdTXf//k7ErzFE8PgvlVkSvA7G3r6dlJvMtQGLZJXNBWIVNGoe80KU1Lt5OMdrplZpdkgArt+6c5qYALNFqe6aLJ52R5n8zXR6D+oONAfbCCHlO7rlwl2CKP9xQKBgF57uvWWVnd8QtxSSjfJmyUKTI7xcTEva+oJ7NgqlwXV7PxSXSL6xwbTif4TWzoRvjaeo94Wd6uwIe/JEV1E6LfthIjhsgzaWNCGZ8hQDMTt4iIbH1MD3VWOpqcH1fEtWw6tvNQuNUhIBsBHyMwY3OSmpxYja725vPKtJ7iJqRa1AoGBAIceLiMdZ8Ly43rLBtNW6+s+6tLuxo3gucSYeT5b3q9AzK0byFMsNDIDiOtBcXENBJmdoIo81mtIfNwz6i03HSOqxVrlsCCnbXHzil7qVK+joKc9ZamHzmp54SR1nIBgcnhXNyMA8GjpsCscEfOZKN2h+Zkr9YXIZLiSDREAEtIJAoGAbK3FTV3qRi0srl809rRTMQRXsfloWZa7N/ndiDNOaCetyZ+2qN1Sy3YR8XDn4Zfcci8o63B+5sl8taOLu5UFfDCWaTHSJF8Kgv+6ytRS+ys4T9Rb7YQalPiJaYUT1BvorOt9J9TA/Dg7WHyRF6wGjsQ8m3Lv60ubCZuWHGiyy4E="
+  },
+  "datastore": {
+    "Spec": {
+      "type": "mount",
+      "mounts": [
+        {
+          "mountpoint": "/blocks",
+          "type": "measure",
+          "prefix": "flatfs.datastore",
+          "child": {
+            "type": "flatfs",
+            "path": "blocks",
+            "sync": true,
+            "shardFunc": "/repo/flatfs/shard/v1/next-to-last/2"
+          }
+        },
+        {
+          "mountpoint": "/",
+          "type": "measure",
+          "prefix": "leveldb.datastore",
+          "child": {
+            "type": "levelds",
+            "path": "datastore",
+            "compression": "none"
+          }
+        }
+      ]
+    }
+  }
+}
