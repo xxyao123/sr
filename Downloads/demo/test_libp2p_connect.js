@@ -158,7 +158,38 @@ function discovery(node) {
         console.log("Connection closed to node: %s", peerInfo.id.toB58String());
     });
 
-     
+	
+	waterfall([
+	(cb) => {
+		        const filePath = "./id.json"
+        fs.exists(filePath, (exists) => {
+            if(exists === false) {
+                console.log('path does not exist')
+                cb()
+            }
+
+            PeerId.createFromJSON(JSON.parse(fs.readFileSync(filePath)),
+            (err, id) => {
+                if(err) {
+                    console.log('err:', err)
+                    cb(err)
+                }
+               
+                cb(null, id)
+            })
+        })
+	},
+	(id, cb) => {
+		    node.dial(id, (err) => {
+	    if(err)
+	    {
+		    console.log('node dial err:', err)
+	    }
+    })
+	}
+	])
+	
+    /* 
     var peer = '/ip4/10.197.163.4/tcp/4002/ipfs/Qmepxu6S132MZyCsz5kwV5rERrRWccVmK5swXkGGjaMRsj'
     console.log('node dial peer: ', peer)
     node.dial(peer, (err) => {
@@ -166,7 +197,7 @@ function discovery(node) {
 	    {
 		    console.log('node dial err:', err)
 	    }
-    })
+    }) */
 }
 
 function normalizeContent1(content) {
